@@ -1,13 +1,18 @@
 # bluenet-basic-localization-ios
 Basic version of the bluenet localization for iOS.
 
-To use, you can use the framework in the release found here:
-https://github.com/crownstone/bluenet-basic-localization-ios/releases
-
-Download the framework, place it in the ./Carthage/Build/iOS folder and include it like a Carthage framework.
-
 This module is made to be used with the BluenetLibIOS which is found here:
 https://github.com/crownstone/bluenet-lib-ios
+
+To use, you can use the zip file in the releases found here:
+https://github.com/crownstone/bluenet-basic-localization-ios/releases
+
+Download the zip file in the latest release and extract it. From the archive /Carthage/Build/iOS get the following files:
+- CrownstoneLocalizationIOS.framework
+- CrownstoneLocalizationIOS.framework.dSYM
+Place these in the ./Carthage/Build/iOS folder of the project you added BluenetLibIOS too and include the .framework file like a Carthage framework.
+
+
 
 To implement your own classifier, you have to make sure your classifier adheres to the following protocols:
 
