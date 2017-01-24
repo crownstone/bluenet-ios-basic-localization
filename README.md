@@ -27,3 +27,26 @@ public protocol iBeaconPacketProtocol {
     var referenceId: String { get }
 }
 ```
+
+A minimal classifier will look like this:
+
+```swift
+
+open class CrownstoneLocalizationIOS: LocalizationClassifier {
+    public init() {}
+    
+    func loadTrainingData(_ id: String, trainingData: <someDataType>) {
+        /* 
+        A method to load training data into the classifier. 
+        This can be called multiple times to load different training sets into the classifier.
+        Each set is a different possibility.
+        The id provided will be returned as string by the classify method
+        */
+    }
+    
+    public func classify(_ inputVector: [iBeaconPacketProtocol]) -> String? {
+        return <result>
+    }
+    
+}
+```
