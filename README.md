@@ -1,6 +1,8 @@
 # bluenet-basic-localization-ios
 Basic version of the bluenet localization for iOS.
 
+### Installation
+
 This module is made to be used with the BluenetLibIOS which is found here:
 https://github.com/crownstone/bluenet-lib-ios
 
@@ -12,26 +14,12 @@ Download the zip file in the latest release and extract it. From the archive /Ca
 - CrownstoneLocalizationIOS.framework.dSYM
 Place these in the ./Carthage/Build/iOS folder of the project you added BluenetLibIOS too and include the .framework file like a Carthage framework.
 
+### Creating your own classifier
 
+To implement your own classifier, you have to make sure your classifier adheres to the protocols hosted here:
+https://github.com/crownstone/bluenet-ios-shared/
 
-To implement your own classifier, you have to make sure your classifier adheres to the following protocols:
-
-```swift
-/**
- * A collection is a subset of your training data.
- * For instance: Group A has training sets X Y Z and Group B has F G H. A and B are collections.
- * If you do not have subsets, you can just provide any string as long as you're consistent.
- */
-public protocol LocalizationClassifier {
-    func classify(_ inputVector: [iBeaconPacketProtocol], collectionId: String) -> String?
-}
-
-// dataformat of the ibeacon packet that is inserted into the classify method
-public protocol iBeaconPacketProtocol {
-    var rssi : NSNumber { get }
-    var idString: String { get }
-}
-```
+The protocols are used to allow Bluenet to communicate with the classifier.
 
 A minimal classifier will look like this:
 
