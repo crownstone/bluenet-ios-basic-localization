@@ -4,7 +4,7 @@ Basic version of the bluenet localization for iOS.
 ### Installation
 
 This module is made to be used with the BluenetLibIOS which is found here:
-https://github.com/crownstone/bluenet-lib-ios
+https://github.com/crownstone/bluenet-ios-lib
 
 To use, you can use the zip file in the releases found here:
 https://github.com/crownstone/bluenet-basic-localization-ios/releases
