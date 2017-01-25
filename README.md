@@ -10,8 +10,8 @@ To use, you can use the zip file in the releases found here:
 https://github.com/crownstone/bluenet-basic-localization-ios/releases
 
 Download the zip file in the latest release and extract it. From the archive /Carthage/Build/iOS get the following files:
-- CrownstoneLocalizationIOS.framework
-- CrownstoneLocalizationIOS.framework.dSYM
+- BluenetBasicLocalization.framework
+- BluenetBasicLocalization.framework.dSYM
 Place these in the ./Carthage/Build/iOS folder of the project you added BluenetLibIOS too and include the .framework file like a Carthage framework.
 
 ### Creating your own classifier
