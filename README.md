@@ -28,16 +28,16 @@ A minimal classifier will look like this:
 open class CrownstoneBasicClassifier: LocalizationClassifier {
     public init() {}
     
-    public func loadTrainingData(_ dataId: String, collectionId: String, trainingData: <someDataType>) {
+    public func loadTrainingData(_ dataId: String, referenceId: String, trainingData: <someDataType>) {
         /* 
         A method to load training data into the classifier. 
         This can be called multiple times to load different training sets into the classifier.
         Each set is a different possibility.
-        The id provided will be returned as string by the classify method
+        The dataId provided will be returned as string by the classify method
         */        
     }
     
-    public func classify(_ inputVector: [iBeaconPacketProtocol], collectionId: String) -> String? {
+    public func classify(_ inputVector: [iBeaconPacketProtocol], referenceId: String) -> String? {
         return <result>
     }
     
