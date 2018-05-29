@@ -30,7 +30,7 @@ The messages arrive on the Linux machine just fine. So, this means that it's not
 
 * How are the service UUIDs encoded in the background BLE advertisements?
 
-At PagePinner... To parse the hashed bit, they use the identity 14ff4c0001:
+At PagePinner... To parse the hashed bit, they use the identity `14ff4c0001`:
 
 * `14`     -> length (0x14, hence 20 bytes)
 * `ff`     -> custom advertisement type
