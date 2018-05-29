@@ -8,7 +8,7 @@ The problem is running as a peripheral in the background. In that case the Apple
 
 > ### The bluetooth-peripheral Background Execution Mode
 >
->[T]he Core Bluetooth framework allows your app to advertise while in the background state. That said, you should be aware >that advertising while your app is in the background operates differently than when your app is in the foreground. In >particular, when your app is advertising while in the background:
+>[T]he Core Bluetooth framework allows your app to advertise while in the background state. That said, you should be aware that advertising while your app is in the background operates differently than when your app is in the foreground. In particular, when your app is advertising while in the background:
 > 
 >* The CBAdvertisementDataLocalNameKey advertisement key is ignored, and the **local name** of peripheral is **not advertised**.
 >* All **service UUIDs** contained in the value of the CBAdvertisementDataServiceUUIDsKey advertisement key are placed in a special **"overflow"** area; they can be discovered only by an iOS device that is **explicitly scanning** for them.
