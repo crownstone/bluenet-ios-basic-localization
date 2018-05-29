@@ -114,21 +114,23 @@ it will report it as incoming `0x3333` messages!
 Hence, what does this mean? How can we use this?
 
 1. Have device identifiers encoded into the service UUIDs. Check beforehand which service UUIDs are unique. This means
-we can track a subset of the 32-bit space (might be less than 128 items for example). 
-2. There is no encryption possible. Any person who can craft a BLE packet with the above layout will be treated by
+we can track a subset of the 32-bit space (in case of 16 bytes times 8 bit flags this would mean 128 items). 
+2. In case we have multiple UUIDs we might see multiple bits going up. This would mean many, many more devices we can
+track. Basically 128^x (with x the number of UUIDs that can be broadcasted).
+3. There is no encryption possible. Any person who can craft a BLE packet with the above layout will be treated by
 the Crownstone scanners in the same way.
-3. It might be necessary to check so now and then if this person is indeed who he transmits to be. This can be done
+4. It might be necessary to check so now and then if this person is indeed who he transmits to be. This can be done
 for example by tag-to-toggle functionality (an NFC-like function using BLE only) if active involvement of the user
 is required. It can also be done in the background by regularly setting up a connection to the BLE device that the 
 device identifier is mapped to. 
-4. Random other iPhones broadcasting an advertisement that interferes with the iPhones that need to be tracked is a
+5. Random other iPhones broadcasting an advertisement that interferes with the iPhones that need to be tracked is a
 possibility. For this it is necessary that these iPhones are advertising (not so likely). One solution is to have a
 setup procedure to the iPhones to be tracked that can rotate their 'service' UUID to a different identifier as soon
 as collisions are discovered. The collision discovery process would require point 3 (a failing authentication check).
-5. There will still be issues if a to-be-tracked iPhone and one not to be tracked are all the time next to each other.
+6. There will still be issues if a to-be-tracked iPhone and one not to be tracked are all the time next to each other.
 For that it might be useful to regularly rotate the 'service' UUID anyway to something not heard for quite a while. 
 This will solve most problems.
-6. Main issue left is the number of iPhones that can be tracked.
+7. Main issue left is the number of iPhones that can be tracked.
 
 ## To check
 
