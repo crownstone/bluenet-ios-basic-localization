@@ -28,9 +28,9 @@ To first find out if there is something fishy going on between iOS devices we br
 
 The messages arrive on the Linux machine just fine. So, this means that it's not the case that they mean that only iOS devices can discover the BLE messages. Moreover, we see that there are single messages sent out. The information is not spread out over multiple messages. The messages also look very straightforward. They do seem to hash/encrypt the service UUIDs, so our next question:
 
-* How are the service UUIDs encoded in the background iBeacon messages?
+* How are the service UUIDs encoded in the background BLE advertisements?
 
-At PagePinner... To parse the hashed bit, they use the identity 14ff4c00001:
+At PagePinner... To parse the hashed bit, they use the identity 14ff4c0001:
 
 * `14`     -> length (0x14, hence 20 bytes)
 * `ff`     -> custom advertisement type
