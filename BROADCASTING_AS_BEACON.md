@@ -130,20 +130,17 @@ as collisions are discovered. The collision discovery process would require poin
 6. There will still be issues if a to-be-tracked iPhone and one not to be tracked are all the time next to each other.
 For that it might be useful to regularly rotate the 'service' UUID anyway to something not heard for quite a while. 
 This will solve most problems.
-7. Main issue left is the number of iPhones that can be tracked.
+7. Main issue left is the number of iPhones that can be tracked (but see below).
+8. Instead of 4-5 we can also rely on the keep-alive message from the iPhone into the Crownstone network (we already do this). 
 
 ## To check
 
-1. Generate all UUIDs in the background on a iPhone, 1 every second for example and register all corresponding byte 
+1. Check what happens with multiple UUIDs. Will multiple bits become one? This would solve all issues regarding the number of iPhones and a lot of the collision problems as well.
+2. Generate all UUIDs in the background on a iPhone, 1 every second for example and register all corresponding byte 
 array values. This will immediately give the upper bound on the number of iPhones that can be tracked. It is probably
 faster to generate byte arrays that are unique and scan over the entire range of UUIDs to see how they are mapped.
-2. We need to establish if the hash from service UUID to the byte array differs from phone to phone. This is not likely
+3. We need to establish if the hash from service UUID to the byte array differs from phone to phone. This is not likely
 because the MAC address is rotated. 
-3. If a phone specific code is used that is not transmitted within the advertisement, it needs to be obtained by the 
-receiving party in another way. Are there some even more special messages advertised when a new phone gets near and 
-sends a scan request?
-4. Are there other scan responses send when an iPhone is scanning? Until now I have just been listening in all the 
-time and this does not seem the case. All the scan responses are all the time exactly the same.
 
 
 # Resources
