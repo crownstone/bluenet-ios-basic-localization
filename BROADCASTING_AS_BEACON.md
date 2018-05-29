@@ -32,9 +32,9 @@ The messages arrive on the Linux machine just fine. So, this means that it's not
 
 At PagePinner... To parse the hashed bit, they use the identity 14ff4c00001:
 
-* 14      -> length (0x14, hence 20 bytes)
-* ff      -> custom advertisement type
-* 4c00001 -> apple defined
+* `14`     -> length (0x14, hence 20 bytes)
+* `ff`     -> custom advertisement type
+* `4c0001` -> apple defined
 
 If we look at a message:
 
