@@ -54,7 +54,9 @@ Dave at Maxwell Walker (see resources) has the following hypothesis:
 
 If this is actually true, we would need to mimick a scanning iOS device from the Crownstone. 
 
-If we have something in the foreground. In this case with local name `Fred` and service UUID `0xC007` the advertisement looks like this:
+![remark](https://placehold.it/15/f03c15/000000?text=+) *This turns out to be false. There is no information in the scan response.*
+
+Suppose we advertise in the foreground. In this case with local name `Fred` and service UUID `0xC007` the advertisement looks like this:
 
     > 04 3E 19 02 01 00 01 8B 89 6B 29 A5 69 0D 02 01 1A 03 03 07 C0 05 09 46 72 65 64 D9 
     > 04 3E 0C 02 01 04 01 8B 89 6B 29 A5 69 00 D9 
@@ -68,18 +70,19 @@ The size of the advertisement is 0x19 (data length) and that of the scan respons
 If we now go to the background it becomes:
 
     > 04 3E 24 02 01 00 01 8B 89 6B 29 A5 69 18 02 01 1A 14 FF 4C 00 01 00 00 00 00 10 00 00 00 00 00 00 00 00 00 00 00 DA 
-    > 04 3E 0C 02 01 04 01 8B 89 6B 29 A5 69 00 DA 
+                                                                        ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^
 
-We see `14 FF 4C 00 01` (see above). The size of the advertisement is now 0x24 and the byte array is:
+We see `14 FF 4C 00 01` (see above). 
+The last byte (in this case `DA`) changes from one packet to the next (this is actually the RSSI value).
+The size of the advertisement is `0x24` and the byte array that contains the hash of the service UUID is:
 
     00 00 00 00 | 10 00 00 00 | 00 00 00 00 | 00 00 00 00
+                  ^
 
-The last byte (in this case `DA`) changes from one packet to the next (this is actually the RSSI value
-).
-
-If we change to other values (for example service UUID `0xC008`) the byte array changes to:
+If we change the service UUID to another value (for example `0xC008` rather than `0xC007`) the byte array changes to:
 
     00 00 00 00 | 00 00 00 08 | 00 00 00 00 | 00 00 00 00
+                            ^
 
 So, how is this encoded? Is there some specific hash so we can go from the values above to the service UUIDs? 
 Interestingly enough, there are hash collisions, so it won't be possible to distinguish every 32-bit UUID. For 
@@ -88,12 +91,10 @@ example, `0x1001` and `0x3333` map to the following sequence:
 With UUID `0x1001`:
 
     > 04 3E 24 02 01 00 01 8C 91 A0 AD 8F 40 18 02 01 1A 14 FF 4C 00 01 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00 00 D3 
-    > 04 3E 0C 02 01 04 01 8C 91 A0 AD 8F 40 00 D3 
 
 With UUID `0x3333`:
 
     > 04 3E 24 02 01 00 01 8C 91 A0 AD 8F 40 18 02 01 1A 14 FF 4C 00 01 00 00 00 00 00 00 00 02 00 00 00 00 00 00 00 00 D3 
-    > 04 3E 0C 02 01 04 01 8C 91 A0 AD 8F 40 00 D3 
 
 Days later the same device with again service UUID `0x1001` and `0x3333` respectively:
 
@@ -102,6 +103,11 @@ Days later the same device with again service UUID `0x1001` and `0x3333` respect
 
 Note that there is a different (virtual) MAC address used: `50:60:0A:65:7B:6F` instead of `40:8F:AD:A0:91:8C` (the bytes
 are shown in the reverse order).
+
+So, what happens if we broadcast `0x1001` and scan with another iOS device for `0x1001` and `0x3333` respectively? Is
+there some hidden channel to cope with hash collisions? The answer is **no**, in both cases the scanning iOS device
+will report incoming advertisements! In other words, if you scan for `0x3333` and a device is broadcasting `0x1001`
+it will report it as incoming `0x3333` messages!
 
 ## Conclusions
 
@@ -127,7 +133,8 @@ This will solve most problems.
 ## To check
 
 1. Generate all UUIDs in the background on a iPhone, 1 every second for example and register all corresponding byte 
-array values. This will immediately give the upper bound on the number of iPhones that can be tracked.
+array values. This will immediately give the upper bound on the number of iPhones that can be tracked. It is probably
+faster to generate byte arrays that are unique and scan over the entire range of UUIDs to see how they are mapped.
 2. We need to establish if the hash from service UUID to the byte array differs from phone to phone. This is not likely
 because the MAC address is rotated. 
 3. If a phone specific code is used that is not transmitted within the advertisement, it needs to be obtained by the 
