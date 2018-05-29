@@ -77,7 +77,7 @@ We see `14 FF 4C 00 01` (see above). The size of the advertisement is now 0x24 a
 The last byte (in this case `DA`) changes from one packet to the next (this is actually the RSSI value
 ).
 
-If we change to other values (for example service UUID `0xC008) the byte array changes to:
+If we change to other values (for example service UUID `0xC008`) the byte array changes to:
 
     00 00 00 00 | 00 00 00 08 | 00 00 00 00 | 00 00 00 00
 
