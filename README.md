@@ -1,3 +1,5 @@
+# Deprecated. Contact us if you require this module.
+
 # bluenet-basic-localization-ios
 Basic version of the bluenet localization for iOS.
 
